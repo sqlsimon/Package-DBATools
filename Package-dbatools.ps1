@@ -8,8 +8,16 @@ if (Test-Path -Path ".\dbatools-master")
     Remove-Item -Path .\dbatools-master -force -recurse
 }
 
+Remove-Item -Path .\contents -Force -Recurse
+
 # extract it fform the archive
+New-Item -Path .\contents -ItemType Directory 
 Expand-Archive dbatools.zip -DestinationPath .
+Move-Item -Path .\dbatools-master\* -Destination .\contents
+
+Remove-Item -Path .\dbatools-master -Force
+Remove-Item -Path .\contents\install.ps1
+
 
 if (Test-Path -Path .\dbatools.zip)
 {
@@ -17,9 +25,9 @@ if (Test-Path -Path .\dbatools.zip)
 }
 
 
-if (Test-Path -Path ".\dbatools-master")
+if (Test-Path -Path ".\contents")
 {
-    Set-Location -Path .\dbatools-master
+    #Set-Location -Path .\contents
     & nuget spec  | Out-Null
     if (Test-Path -Path .\Package.nuspec)
     {
@@ -43,9 +51,15 @@ if (Test-Path -Path ".\dbatools-master")
         $node = $spec_file.package.metadata.dependencies.dependency
         $node.ParentNode.RemoveChild($node)
 
-        $spec_file.Save("C:\Work\dbatools.io\dbatools-master\dbatools.nuspec")
+        $working_dir = $PWD
+        $spec_file.Save("$working_dir\dbatools.nuspec")
 
+        # Get rid of the installer we don't need that
         Remove-Item -Path Package.nuspec
+        Remove-Item -Path Readme.md
+
+        & nuget pack | Out-Null
+
     }
 }
 
