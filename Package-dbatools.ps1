@@ -51,7 +51,7 @@ if (Test-Path -Path ".\contents")
         $spec_file.package.metadata.licenseUrl = "https://github.com/sqlcollaborative/dbatools/blob/master/LICENSE.txt"
         $spec_file.package.metadata.projectUrl = "http://dbatools.io"
         $spec_file.package.metadata.iconUrl = "https://camo.githubusercontent.com/8c93ea16603184bd5a75fe4da5647891e23ed8e1/68747470733a2f2f626c6f672e6e65746e657264732e6e65742f77702d636f6e74656e742f75706c6f6164732f323031362f30352f646261746f6f6c732e706e67"
-        $spec_file.package.metadata.description = "Powershell module of useful SQL Server functions"
+        $spec_file.package.metadata.description = "Powershell module of useful SQL Server functions. See http://dbatools.io for more information"
         $spec_file.package.metadata.tags = "dbatools powershell"
 
         $node = $spec_file.package.metadata.dependencies.dependency
