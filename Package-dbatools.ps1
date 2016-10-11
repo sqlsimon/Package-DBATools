@@ -66,6 +66,8 @@ if (Test-Path -Path ".\contents")
 
         & nuget pack | Out-Null
 
+        & nuget push *.nupkg -ApiKey API-IHP1C4UP9XPENG20TN0BTZHJZK4 -Source "http://192.168.0.6/nuget/packages"
+
     }
 }
 
